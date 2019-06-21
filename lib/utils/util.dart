@@ -189,33 +189,38 @@ int getUserCezaTotal(int user) {
   return total;
 }
 
-int getUserKozTotal(int user) {
+String getUserKozTotal(int user) {
   int total = 0;
+  int count = 0;
   switch (user) {
     case 1:
       hands.where((l) => l.handType == HandType.koz).forEach((Hand a) {
         total += 50 * a.gamer1Result;
+        count += a.gamer1Result;
       });
       break;
     case 2:
       hands.where((l) => l.handType == HandType.koz).forEach((Hand a) {
         total += 50 * a.gamer2Result;
+        count += a.gamer2Result;
       });
       break;
     case 3:
       hands.where((l) => l.handType == HandType.koz).forEach((Hand a) {
         total += 50 * a.gamer3Result;
+        count += a.gamer3Result;
       });
       break;
     case 4:
       hands.where((l) => l.handType == HandType.koz).forEach((Hand a) {
         total += 50 * a.gamer4Result;
+        count += a.gamer4Result;
       });
       break;
     default:
       total = 0;
   }
-  return total;
+  return total.toString() + " " + count.toString();
 }
 
 int getGeneralTotal(int user) {
