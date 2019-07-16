@@ -18,7 +18,7 @@ class CezaHandRowState extends State<CezaHandRow> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(top: 4.0, left: 8.0),
+      padding: EdgeInsets.only(top: st.cezaHandRowPaddingTop, left: st.cezaHandRowPaddingLeft),
       child: Row(
         children: <Widget>[
           cezaNameSection(),
@@ -32,10 +32,10 @@ class CezaHandRowState extends State<CezaHandRow> {
     return Container(
       child: Text(
         getCezaTypeName(widget.cezaHand),
-        style: TextStyle(fontWeight: FontWeight.bold),
+        style: TextStyle(fontWeight: FontWeight.bold, fontSize: st.rowPointSize),
       ),
       width: 120.0,
-      padding: EdgeInsets.only(left: 8.0),
+      padding: EdgeInsets.only(left: 4.0),
       decoration: new BoxDecoration(
         borderRadius: new BorderRadius.all(new Radius.circular(10.0)),
         color: Colors.amber.shade300,
@@ -46,7 +46,7 @@ class CezaHandRowState extends State<CezaHandRow> {
   Widget cezaPuanSection() {
     return Expanded(
       child: new Container(
-        padding: EdgeInsets.only(left: 8.0),
+        padding: EdgeInsets.only(left: 4.0),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceAround,

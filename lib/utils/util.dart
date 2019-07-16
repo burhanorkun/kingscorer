@@ -683,11 +683,11 @@ void deleteLastGame() {
   hands.removeLast();
 }
 
-void resetCurrentGame(){
+void resetCurrentGame() {
   hands.removeRange(1, hands.length);
 }
 
-void startNewGame(){
+void startNewGame() {
   hands = [];
 }
 
@@ -701,19 +701,18 @@ String capitalize(String input) {
   return input[0].toUpperCase() + input.substring(1);
 }
 
-String mySubString(String str, int b){
+String mySubString(String str, int b) {
+  String tmpStr = "";
 
-  String tmpStr="";
-
-  if(str == null){
+  if (str == null) {
     return "";
   }
-  if(str.length==1 || str.length==b){
+  if (str.length == 1 || str.length == b) {
     return str;
   }
 
-  for(int i=0; i<str.length;i++){
-    if(i < b){
+  for (int i = 0; i < str.length; i++) {
+    if (i < b) {
       tmpStr += str[i];
     }
   }
@@ -721,11 +720,10 @@ String mySubString(String str, int b){
   return tmpStr;
 }
 
-bool areDiffUserNames(Map<String, dynamic> formData){
-
-  for(int i=0; i<4; i++){
-    for(int j=i+1; j<4; j++){
-      if(formData['gamer${i+1}'] == formData['gamer${j+1}']){
+bool areDiffUserNames(Map<String, dynamic> formData) {
+  for (int i = 0; i < 4; i++) {
+    for (int j = i + 1; j < 4; j++) {
+      if (formData['gamer${i + 1}'] == formData['gamer${j + 1}']) {
         return false;
       }
     }

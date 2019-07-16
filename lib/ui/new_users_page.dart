@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:kingscorer/Routes.dart';
 import 'package:kingscorer/ui/home/gradient_app_bar.dart';
 import 'package:kingscorer/utils/util.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:toast/toast.dart';
+//import 'package:fluttertoast/fluttertoast.dart';
 
 class NewUsersPage extends StatefulWidget {
   @override
@@ -23,7 +24,7 @@ class _NewUsersPageState extends State<NewUsersPage> {
   String optionCaption3;
   String optionCaption4;
 
-  static Map<String, dynamic> _formData = {
+  static Map<String, String> _formData = {
     'gamer1': null,
     'gamer2': null,
     'gamer3': null,
@@ -122,7 +123,7 @@ class _NewUsersPageState extends State<NewUsersPage> {
                       }
                     },
                     onSaved: (String value) {
-                      _formData['gamer1'] = capitalize(value);
+                      _formData['gamer1'] = capitalize(value.trim());
                     },
                     controller: myController1,
                     maxLength: 30,
@@ -142,7 +143,7 @@ class _NewUsersPageState extends State<NewUsersPage> {
                       }
                     },
                     onSaved: (String value) {
-                      _formData['gamer2'] = capitalize(value);
+                      _formData['gamer2'] = capitalize(value.trim());
                     },
                     controller: myController2,
                     maxLength: 30,
@@ -162,7 +163,7 @@ class _NewUsersPageState extends State<NewUsersPage> {
                       }
                     },
                     onSaved: (String value) {
-                      _formData['gamer3'] = capitalize(value);
+                      _formData['gamer3'] = capitalize(value.trim());
                     },
                     controller: myController3,
                     maxLength: 30,
@@ -182,7 +183,7 @@ class _NewUsersPageState extends State<NewUsersPage> {
                       }
                     },
                     onSaved: (String value) {
-                      _formData['gamer4'] = capitalize(value);
+                      _formData['gamer4'] = capitalize(value.trim());
                     },
                     controller: myController4,
                     maxLength: 30,
@@ -265,17 +266,39 @@ class _NewUsersPageState extends State<NewUsersPage> {
                         }
                         _formKey.currentState.save();
                         if (_radioValue < 0) {
-                          return;
-                        }
-                        if(!areDiffUserNames(_formData)){
+                          Toast.show("Oyuna kim başlayacak? Lütfen oyuna başlayacak oyuncuyu seçiniz.",
+                              context,
+                              duration: Toast.LENGTH_LONG,
+                              gravity: Toast.CENTER,
+                              backgroundColor: Colors.red);
+                          /*
                           Fluttertoast.showToast(
-                              msg: "Oyuncu isimleri aynı olamaz. Lütfen farklı isim giriniz.",
+                              msg:
+                                  "Oyuna kim başlayacak? Lütfen oyuna başlayacak oyuncuyu seçiniz.",
                               toastLength: Toast.LENGTH_LONG,
                               gravity: ToastGravity.CENTER,
                               timeInSecForIos: 3,
                               backgroundColor: Colors.red,
                               textColor: Colors.white,
-                              fontSize: 16.0);
+                              fontSize: 16.0); */
+                          return;
+                        }
+                        if (!areDiffUserNames(_formData)) {
+                          Toast.show("Oyuncu isimleri aynı olamaz. Lütfen farklı isim giriniz.",
+                              context,
+                              duration: Toast.LENGTH_LONG,
+                              gravity: Toast.CENTER,
+                              backgroundColor: Colors.red);
+                          /*
+                          Fluttertoast.showToast(
+                              msg:
+                                  "Oyuncu isimleri aynı olamaz. Lütfen farklı isim giriniz.",
+                              toastLength: Toast.LENGTH_LONG,
+                              gravity: ToastGravity.CENTER,
+                              timeInSecForIos: 3,
+                              backgroundColor: Colors.red,
+                              textColor: Colors.white,
+                              fontSize: 16.0); */
                           return;
                         }
 

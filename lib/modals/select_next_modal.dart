@@ -1,7 +1,8 @@
 import 'package:kingscorer/utils/enums.dart';
 import 'package:kingscorer/utils/util.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:toast/toast.dart';
+//import 'package:fluttertoast/fluttertoast.dart';
 
 class SelectNextModal extends ModalRoute<void> {
   @override
@@ -232,6 +233,13 @@ class SelectNextModal extends ModalRoute<void> {
               onUpdateCezaKoz(index);
               Navigator.pop(context);
             } else {
+              Toast.show("Bu oyunu seçim hakkı dolmuştur. Başka oyun seçiniz.",
+                  context,
+                  duration: Toast.LENGTH_LONG,
+                  gravity: Toast.CENTER,
+                  backgroundColor: Colors.red);
+              //.show("Toast plugin app", duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
+              /*
               Fluttertoast.showToast(
                   msg: "Bu oyunu seçim hakkı dolmuştur. Başka oyun seçiniz.",
                   toastLength: Toast.LENGTH_LONG,
@@ -240,6 +248,7 @@ class SelectNextModal extends ModalRoute<void> {
                   backgroundColor: Colors.red,
                   textColor: Colors.white,
                   fontSize: 16.0);
+                  */
             }
           }
         },

@@ -15,11 +15,6 @@ class _CustomDataTableState extends State<CustomDataTable> {
   bool finished;
   Hand selectedHand;
 
-  int gamer1Result;
-  int gamer2Result;
-  int gamer3Result;
-  int gamer4Result;
-
   String gamer1Name = '';
   String gamer2Name = '';
   String gamer3Name = '';
@@ -46,7 +41,7 @@ class _CustomDataTableState extends State<CustomDataTable> {
           cezaCountsInfo(),
           ListView(
             shrinkWrap: true,
-            padding: EdgeInsets.only(top: 1.0),
+            padding: EdgeInsets.only(top: st.customDataTableListviewTop),
             children: getCezaHandsWidgets(),
           ),
           cezaTotalInfo(),
@@ -54,7 +49,7 @@ class _CustomDataTableState extends State<CustomDataTable> {
           kozCountsInfo(),
           ListView(
             shrinkWrap: true,
-            padding: EdgeInsets.only(top: 1.0),
+            padding: EdgeInsets.only(top: st.customDataTableListviewTop),
             children: getKozHandsWidgets(),
           ),
           kozTotalInfo(),
@@ -84,7 +79,8 @@ class _CustomDataTableState extends State<CustomDataTable> {
                         : Text(
                             (selectedHand.turnCount - 1).toString() +
                                 '.el: ' +
-                                mySubString(selectedHand.turnGamer.username, 15) +
+                                mySubString(
+                                    selectedHand.turnGamer.username, 15) +
                                 ' -> ' +
                                 getKozTypeName2(selectedHand),
                             style: TextStyle(
@@ -101,44 +97,43 @@ class _CustomDataTableState extends State<CustomDataTable> {
           )
         ],
       ),
-      floatingActionButton: finished
+      floatingActionButton: (finished || getMaxHandCount() == 20)
           ? Container()
-          : Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                Container(
-                  width: 40.0,
-                  height: 40.0,
-                  child: FloatingActionButton(
-                    onPressed: () {
-                      if (selectedHand == null) {
-                        Navigator.of(context).push(SelectNextModal(
-                            onUpdateCezaKoz: _updateNewHandGame));
-                        setState(() {
-                          finished = getMaxHandCount() < 20 ? false : true;
-                        });
-                      } else {
-                        showDialog(
-                            context: context,
-                            builder: (_) {
-                              return FillScore(
-                                  onSetPoint: _fillHandScore,
+          : Opacity(
+              opacity: getMaxHandCount() > 16 ? 0.5 : 1.0,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  Container(
+                    width: 40.0,
+                    height: 40.0,
+                    child: FloatingActionButton(
+                      onPressed: () {
+                        if (selectedHand == null) {
+                          Navigator.of(context).push(SelectNextModal(
+                              onUpdateCezaKoz: _updateNewHandGame));
+                          setState(() {
+                            finished = getMaxHandCount() < 20 ? false : true;
+                          });
+                        } else {
+                          showDialog(
+                              context: context,
+                              builder: (_) {
+                                return FillScore(
                                   selectHand: selectedHand,
                                   clearSelectedHand: clearSelectedHand,
                                   finishedHand: _finishedHand,
-                                  gamer1Result: gamer1Result,
-                                  gamer2Result: gamer2Result,
-                                  gamer3Result: gamer3Result,
-                                  gamer4Result: gamer4Result);
-                            });
-                      }
-                    },
-                    tooltip: 'Add Point',
-                    child:
-                        Icon(selectedHand == null ? Icons.add : Icons.create),
+                                );
+                              });
+                        }
+                      },
+                      tooltip: 'Add Point',
+                      child:
+                          Icon(selectedHand == null ? Icons.add : Icons.create),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
     );
   }
@@ -213,7 +208,7 @@ class _CustomDataTableState extends State<CustomDataTable> {
 
   Widget kozCountsInfo() {
     return new Container(
-      padding: EdgeInsets.only(top: 4.0, left: 8.0),
+      padding: EdgeInsets.only(top: 2.0, left: 8.0),
       child: Row(
         children: <Widget>[
           Container(
@@ -484,7 +479,7 @@ class _CustomDataTableState extends State<CustomDataTable> {
 
   Widget generalTotalInfo() {
     return new Container(
-      padding: EdgeInsets.only(top: 10.0, left: 8.0),
+      padding: EdgeInsets.only(top: 2.0, left: 8.0),
       child: Row(
         children: <Widget>[
           Container(
@@ -586,40 +581,13 @@ class _CustomDataTableState extends State<CustomDataTable> {
   void _updateNewHandGame(int index) {
     setState(() {
       if (getMaxHandCount() == 1) {}
-      //print('index:' + index.toString());
+
       selectedHand = updateNewHandWidget(index);
       finished = getMaxHandCount() < 20 ? false : true;
     });
   }
 
-  void _fillHandScore(int index) {
-    //print('index:' + index.toString());
-    if (index > 0) {
-      if (index == 1) {
-        gamer1Result += 1;
-      } else if (index == 2) {
-        gamer2Result += 1;
-      } else if (index == 3) {
-        gamer3Result += 1;
-      } else if (index == 4) {
-        gamer4Result += 1;
-      }
-    } else {
-      if (index == -1) {
-        gamer1Result += -1;
-      } else if (index == -2) {
-        gamer2Result += -1;
-      } else if (index == -3) {
-        gamer3Result += -1;
-      } else if (index == -4) {
-        gamer4Result += -1;
-      }
-    }
-    // TO DO: add new game with scores
-    setState(() {});
-  }
-
-  void _finishedHand() {
+  void _finishedHand(Map<String, int> result) {
     Hand newHand = new Hand(
       handType: selectedHand.handType,
       cezaType: selectedHand.cezaType,
@@ -627,13 +595,13 @@ class _CustomDataTableState extends State<CustomDataTable> {
       turnCount: selectedHand.turnCount,
       turnGamer: selectedHand.turnGamer,
       gamer1: selectedHand.gamer1,
-      gamer1Result: gamer1Result,
+      gamer1Result: result['gamer1'],
       gamer2: selectedHand.gamer2,
-      gamer2Result: gamer2Result,
+      gamer2Result: result['gamer2'],
       gamer3: selectedHand.gamer3,
-      gamer3Result: gamer3Result,
+      gamer3Result: result['gamer3'],
       gamer4: selectedHand.gamer4,
-      gamer4Result: gamer4Result,
+      gamer4Result: result['gamer4'],
     );
     pushNewHand(newHand);
     resetGamersScore();
@@ -644,19 +612,11 @@ class _CustomDataTableState extends State<CustomDataTable> {
 
   void resetGamersScore() {
     selectedHand = null;
-    gamer1Result = 0;
-    gamer2Result = 0;
-    gamer3Result = 0;
-    gamer4Result = 0;
   }
 
   void clearSelectedHand() {
     setState(() {
       selectedHand = null;
-      gamer1Result = 0;
-      gamer2Result = 0;
-      gamer3Result = 0;
-      gamer4Result = 0;
     });
   }
 }

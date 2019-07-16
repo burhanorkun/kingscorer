@@ -18,7 +18,8 @@ class KozHandRowState extends State<KozHandRow> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(top: 4.0, left: 8.0),
+      padding: EdgeInsets.only(
+          top: st.kozHandRowPaddingTop, left: st.kozHandRowPaddingLeft),
       child: Row(
         children: <Widget>[
           kozNameSection(),
@@ -32,10 +33,10 @@ class KozHandRowState extends State<KozHandRow> {
     return Container(
       child: Text(
         getKozTypeName(widget.kozHand),
-        style: TextStyle(fontWeight: FontWeight.bold),
+        style: TextStyle(fontWeight: FontWeight.bold,fontSize: st.rowPointSize),
       ),
       width: 120.0,
-      padding: EdgeInsets.only(left: 8.0),
+      padding: EdgeInsets.only(left: 4.0),
       decoration: new BoxDecoration(
         borderRadius: new BorderRadius.all(new Radius.circular(10.0)),
         color: Colors.amber.shade300,
@@ -46,7 +47,7 @@ class KozHandRowState extends State<KozHandRow> {
   Widget kozPuanSection() {
     return Expanded(
       child: new Container(
-        padding: EdgeInsets.only(left: 8.0),
+        padding: EdgeInsets.only(left: 4.0),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceAround,

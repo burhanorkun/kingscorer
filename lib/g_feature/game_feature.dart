@@ -52,7 +52,7 @@ class _GameFeatureState extends State<GameFeature> {
                           ])),
                   child: new Center(
                       child: Text(
-                    'Son Oyunu Sil',
+                    'Geri Al',
                     style: TextStyle(
                         color: Colors.white, fontWeight: FontWeight.bold),
                   )),
@@ -166,7 +166,7 @@ class _GameFeatureState extends State<GameFeature> {
         return AlertDialog(
           title: Text('Emin misiniz?'),
           content: const Text(
-              'Oynanan oyununuzda son oyun geri gelmeyecek şekilde silinecektir.'),
+              'Son el silinecektir.'),
           actions: <Widget>[
             FlatButton(
               child: const Text('İPTAL'),
