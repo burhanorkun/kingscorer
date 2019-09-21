@@ -117,11 +117,7 @@ class _NewUsersPageState extends State<NewUsersPage> {
                         filled: true,
                         fillColor: Colors.white,
                         counterText: ''),
-                    validator: (String value) {
-                      if (value.isEmpty) {
-                        return 'Lütfen boş bırakmayınız';
-                      }
-                    },
+                    validator: (value) => value.isEmpty ? 'Lütfen boş bırakmayınız':null,
                     onSaved: (String value) {
                       _formData['gamer1'] = capitalize(value.trim());
                     },
@@ -137,11 +133,7 @@ class _NewUsersPageState extends State<NewUsersPage> {
                         filled: true,
                         fillColor: Colors.white,
                         counterText: ''),
-                    validator: (String value) {
-                      if (value.isEmpty) {
-                        return 'Lütfen boş bırakmayınız';
-                      }
-                    },
+                    validator: (value) => value.isEmpty ? 'Lütfen boş bırakmayınız':null,
                     onSaved: (String value) {
                       _formData['gamer2'] = capitalize(value.trim());
                     },
@@ -157,11 +149,7 @@ class _NewUsersPageState extends State<NewUsersPage> {
                         filled: true,
                         fillColor: Colors.white,
                         counterText: ''),
-                    validator: (String value) {
-                      if (value.isEmpty) {
-                        return 'Lütfen boş bırakmayınız';
-                      }
-                    },
+                    validator: (value) => value.isEmpty ? 'Lütfen boş bırakmayınız':null,
                     onSaved: (String value) {
                       _formData['gamer3'] = capitalize(value.trim());
                     },
@@ -177,11 +165,7 @@ class _NewUsersPageState extends State<NewUsersPage> {
                         filled: true,
                         fillColor: Colors.white,
                         counterText: ''),
-                    validator: (String value) {
-                      if (value.isEmpty) {
-                        return 'Lütfen boş bırakmayınız';
-                      }
-                    },
+                    validator: (value) => value.isEmpty ? 'Lütfen boş bırakmayınız':null,
                     onSaved: (String value) {
                       _formData['gamer4'] = capitalize(value.trim());
                     },
