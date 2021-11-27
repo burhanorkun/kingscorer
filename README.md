@@ -1,6 +1,6 @@
 # KingScorer
 
-It is open source project.
+It is an open source project.
 
 https://play.google.com/store/apps/details?id=com.orkun.kingscorer&gl=TR
 
