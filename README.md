@@ -1,6 +1,7 @@
 # KingScorer
 
 It is an open source project.
+It is the score board program of the King card game.
 
 You can download from Google Play [KingScorer](https://play.google.com/store/apps/details?id=com.orkun.kingscorer&gl=TR).
 
