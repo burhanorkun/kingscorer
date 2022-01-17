@@ -1,5 +1,8 @@
 # KingScorer
 
+[![](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/mobile-kingscorer/community)
+
+
 It is an open source project.
 It is the score board program of the King card game.
 
